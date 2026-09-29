@@ -1,0 +1,538 @@
+/* =========================================
+   SecureStudent - Main Stylesheet
+   ========================================= */
+
+:root {
+    --bg: #f2f2fa;
+    --sidebar: #ffffff;
+    --card: #ffffff;
+    --primary: #8d8cf5;
+    --primary-light: #dcdcff;
+    --blue: #bde8f7;
+    --yellow: #ffe58a;
+    --green: #bdebd0;
+    --text: #26313b;
+    --muted: #89919a;
+    --border: #ececf3;
+    --danger: #ffb8b8;
+    --shadow: 0 8px 30px rgba(50, 55, 80, 0.06);
+    --radius: 18px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* =========================================
+   Layout
+   ========================================= */
+
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* =========================================
+   Sidebar
+   ========================================= */
+
+.sidebar {
+    width: 235px;
+    min-height: 100vh;
+    background: var(--sidebar);
+    padding: 28px 18px;
+    border-right: 1px solid var(--border);
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px 35px;
+}
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    background: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+}
+
+.brand-name {
+    font-size: 20px;
+    font-weight: 750;
+    letter-spacing: -0.5px;
+}
+
+.brand-tag {
+    font-size: 10px;
+    background: var(--yellow);
+    padding: 4px 7px;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.menu-title {
+    color: #b0b3ba;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 0 13px;
+    margin: 15px 0 10px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #747b84;
+    padding: 12px 14px;
+    border-radius: 12px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.nav-link:hover {
+    background: #f5f5fb;
+    color: var(--text);
+}
+
+.nav-link.active {
+    background: var(--blue);
+    color: #26313b;
+}
+
+.nav-icon {
+    width: 20px;
+    text-align: center;
+    font-size: 17px;
+}
+
+/* =========================================
+   Main Content
+   ========================================= */
+
+.main-content {
+    margin-left: 235px;
+    width: calc(100% - 235px);
+    padding: 30px 36px;
+}
+
+/* =========================================
+   Top Bar
+   ========================================= */
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    padding: 10px 15px;
+    width: 280px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 13px;
+    background: transparent;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.profile-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 750;
+}
+
+.profile-name {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.profile-role {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+/* =========================================
+   Page Heading
+   ========================================= */
+
+.page-heading {
+    margin-bottom: 25px;
+}
+
+.page-heading h1 {
+    margin: 0;
+    font-size: 30px;
+    letter-spacing: -1px;
+}
+
+.page-heading p {
+    margin: 7px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* =========================================
+   Statistic Cards
+   ========================================= */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    padding: 23px;
+    border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card:nth-child(1) {
+    background: var(--primary-light);
+}
+
+.stat-card:nth-child(2) {
+    background: var(--yellow);
+}
+
+.stat-card:nth-child(3) {
+    background: var(--blue);
+}
+
+.stat-label {
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.75;
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: 800;
+    margin-top: 8px;
+    letter-spacing: -1px;
+}
+
+.stat-description {
+    font-size: 12px;
+    margin-top: 5px;
+    opacity: 0.65;
+}
+
+/* =========================================
+   Cards
+   ========================================= */
+
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 18px;
+}
+
+/* =========================================
+   Quick Actions
+   ========================================= */
+
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.quick-action {
+    text-decoration: none;
+    color: var(--text);
+    background: #f8f8fc;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    transition: 0.2s ease;
+}
+
+.quick-action:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.quick-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.quick-action strong {
+    display: block;
+    font-size: 14px;
+}
+
+.quick-action span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* =========================================
+   Buttons
+   ========================================= */
+
+.btn {
+    border: none;
+    border-radius: 11px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.2s ease;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    opacity: 0.88;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: #6f3030;
+}
+
+.btn-secondary {
+    background: #f1f1f6;
+    color: var(--text);
+}
+
+/* =========================================
+   Tables
+   ========================================= */
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.student-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.student-table th {
+    text-align: left;
+    color: var(--muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 13px;
+    border-bottom: 1px solid var(--border);
+}
+
+.student-table td {
+    padding: 15px 13px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+
+.student-table tr:hover {
+    background: #fafaff;
+}
+
+.student-name {
+    font-weight: 700;
+}
+
+.actions {
+    display: flex;
+    gap: 7px;
+}
+
+/* =========================================
+   Forms
+   ========================================= */
+
+.form-card {
+    max-width: 650px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 13px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    outline: none;
+    font-size: 14px;
+    background: #fafafd;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary);
+    background: white;
+}
+
+/* =========================================
+   Search
+   ========================================= */
+
+.student-search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.student-search input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    outline: none;
+}
+
+/* =========================================
+   Responsive
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 190px;
+    }
+
+    .main-content {
+        margin-left: 190px;
+        width: calc(100% - 190px);
+        padding: 25px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .sidebar {
+        position: static;
+        width: 100%;
+        min-height: auto;
+    }
+
+    .app-layout {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+/* Teacher page */
+
+.stat-badge {
+    background: #f0edff;
+    color: #6c63b5;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.module-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #eef5ff;
+    color: #5574a8;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.not-assigned {
+    color: #999;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+}

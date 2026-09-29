@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Modules | SecureStudent</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">🛡️</div>
+
+            <span class="brand-name">
+                SecureStudent
+            </span>
+
+            <span class="brand-tag">
+                V1
+            </span>
+
+        </div>
+
+
+        <div class="menu-title">
+            MENU
+        </div>
+
+
+        <a href="{{ url_for('home') }}" class="nav-link">
+            <span class="nav-icon">⌂</span>
+            Dashboard
+        </a>
+
+
+        <a href="{{ url_for('students') }}" class="nav-link">
+            <span class="nav-icon">👥</span>
+            Students
+        </a>
+
+
+        <a href="{{ url_for('add_student') }}" class="nav-link">
+            <span class="nav-icon">＋</span>
+            Add Student
+        </a>
+
+
+        <a href="{{ url_for('modules') }}" class="nav-link active">
+            <span class="nav-icon">📚</span>
+            Modules
+        </a>
+
+
+        <a href="{{ url_for('teachers') }}" class="nav-link">
+            <span class="nav-icon">👨‍🏫</span>
+            Teachers
+        </a>
+
+
+        <div class="menu-title">
+            MANAGE
+        </div>
+
+
+        <a href="{{ url_for('manage_edit') }}" class="nav-link">
+            <span class="nav-icon">✏️</span>
+            Edit Student
+        </a>
+
+
+        <a href="{{ url_for('manage_delete') }}" class="nav-link">
+            <span class="nav-icon">🗑️</span>
+            Delete Student
+        </a>
+
+
+        <div class="menu-title">
+            OTHER
+        </div>
+
+
+        <a href="{{ url_for('students') }}" class="nav-link">
+            <span class="nav-icon">⌕</span>
+            Search
+        </a>
+
+
+        <a href="{{ url_for('logout') }}" class="nav-link">
+            <span class="nav-icon">↪</span>
+            Logout
+        </a>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+
+        <!-- TOP BAR -->
+
+        <div class="topbar">
+
+            <div class="search-box">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    placeholder="Search modules..."
+                >
+
+            </div>
+
+
+            <div class="profile">
+
+                <div>
+
+                    <div class="profile-name">
+                        {{ session.get("username") }}
+                    </div>
+
+                    <div class="profile-role">
+                        Administrator
+                    </div>
+
+                </div>
+
+
+                <div class="profile-avatar">
+                    {{ session.get("username")[0]|upper }}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PAGE HEADING -->
+
+        <div class="page-heading">
+
+            <h1>
+                Modules
+            </h1>
+
+            <p>
+                View academic modules and their allocated teachers.
+            </p>
+
+        </div>
+
+
+        <!-- MODULE CARD -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2 class="card-title">
+                        Module Allocation
+                    </h2>
+
+                    <p style="color:#89919a; font-size:13px;">
+                        Each module is assigned to a responsible teacher.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table class="student-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Module
+                            </th>
+
+                            <th>
+                                Teacher
+                            </th>
+
+                            <th>
+                                Students
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for module in modules %}
+
+                        <tr>
+
+                            <td>
+                                #{{ loop.index }}
+                            </td>
+
+
+                            <td class="student-name">
+                                {{ module["name"] }}
+                            </td>
+
+
+                            <td>
+
+                                {% if module["teacher_name"] %}
+
+                                    <strong>
+                                        {{ module["teacher_name"] }}
+                                    </strong>
+
+                                {% else %}
+
+                                    <span style="color:#89919a;">
+                                        Not allocated
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td>
+
+                                {{ module["student_count"] }}
+
+                            </td>
+
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+
+                            <td
+                                colspan="4"
+                                style="
+                                    text-align:center;
+                                    padding:35px;
+                                "
+                            >
+
+                                <div style="font-size:30px;">
+                                    📚
+                                </div>
+
+                                <br>
+
+                                <strong>
+                                    No modules found
+                                </strong>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

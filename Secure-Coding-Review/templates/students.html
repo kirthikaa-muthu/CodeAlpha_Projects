@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Students | SecureStudent</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🛡️
+            </div>
+
+            <span class="brand-name">
+                SecureStudent
+            </span>
+
+            <span class="brand-tag">
+                V1
+            </span>
+
+        </div>
+
+
+        <div class="menu-title">
+            MENU
+        </div>
+
+
+        <a
+            href="{{ url_for('home') }}"
+            class="nav-link"
+        >
+            <span class="nav-icon">⌂</span>
+            Dashboard
+        </a>
+
+
+        <a
+            href="{{ url_for('students') }}"
+            class="nav-link active"
+        >
+            <span class="nav-icon">👥</span>
+            Students
+        </a>
+
+
+        <a
+            href="{{ url_for('add_student') }}"
+            class="nav-link"
+        >
+            <span class="nav-icon">＋</span>
+            Add Student
+        </a>
+
+
+        <a
+            href="{{ url_for('modules') }}"
+            class="nav-link"
+        >
+            <span class="nav-icon">📚</span>
+            Modules
+        </a>
+
+
+        <a
+            href="{{ url_for('teachers') }}"
+            class="nav-link"
+        >
+            <span class="nav-icon">👨‍🏫</span>
+            Teachers
+        </a>
+
+
+        <div class="menu-title">
+            MANAGE
+        </div>
+
+
+        <a
+            href="{{ url_for('manage_edit') }}"
+            class="nav-link"
+        >
+            <span class="nav-icon">✏️</span>
+            Edit Student
+        </a>
+
+
+        <a
+            href="{{ url_for('manage_delete') }}"
+            class="nav-link"
+        >
+            <span class="nav-icon">🗑️</span>
+            Delete Student
+        </a>
+
+
+        <div class="menu-title">
+            OTHER
+        </div>
+
+
+        <a
+            href="{{ url_for('students') }}"
+            class="nav-link"
+        >
+            <span class="nav-icon">⌕</span>
+            Search
+        </a>
+
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="nav-link"
+        >
+            <span class="nav-icon">↪</span>
+            Logout
+        </a>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- TOP BAR -->
+
+        <div class="topbar">
+
+            <div class="search-box">
+
+                <span>⌕</span>
+
+                <form
+                    method="GET"
+                    action="{{ url_for('students') }}"
+                    style="width: 100%;"
+                >
+
+                    <input
+                        type="text"
+                        name="search"
+                        placeholder="Search students..."
+                        value="{{ search }}"
+                    >
+
+                </form>
+
+            </div>
+
+
+            <div class="profile">
+
+                <div>
+
+                    <div class="profile-name">
+                        {{ session.get("username") }}
+                    </div>
+
+                    <div class="profile-role">
+                        Administrator
+                    </div>
+
+                </div>
+
+
+                <div class="profile-avatar">
+
+                    {{ session.get("username")[0]|upper }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PAGE HEADING -->
+
+        <div class="page-heading">
+
+            <h1>
+                Students
+            </h1>
+
+            <p>
+                View and manage registered student records.
+            </p>
+
+        </div>
+
+
+        <!-- STUDENT CARD -->
+
+        <div class="card">
+
+
+            <div
+                class="card-header"
+                style="margin-bottom: 15px;"
+            >
+
+                <div>
+
+                    <h2 class="card-title">
+                        Student Records
+                    </h2>
+
+                    <p style="color:#89919a; font-size:13px;">
+                        Students and their allocated module teachers.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="{{ url_for('add_student') }}"
+                    class="btn btn-primary"
+                >
+                    + Add Student
+                </a>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <form
+                method="GET"
+                action="{{ url_for('students') }}"
+                class="student-search"
+            >
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search by name, email or course..."
+                    value="{{ search }}"
+                >
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Search
+                </button>
+
+
+                {% if search %}
+
+                <a
+                    href="{{ url_for('students') }}"
+                    class="btn btn-secondary"
+                >
+                    Clear
+                </a>
+
+                {% endif %}
+
+            </form>
+
+
+            <!-- STUDENT TABLE -->
+
+            <div class="table-wrapper">
+
+                <table class="student-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Student
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Course
+                            </th>
+
+                            <th>
+                                Year
+                            </th>
+
+                            <th>
+                                Module Teacher
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for student in students %}
+
+                        <tr>
+
+                            <!-- DISPLAY NUMBER -->
+
+                            <td>
+                                #{{ loop.index }}
+                            </td>
+
+
+                            <!-- STUDENT -->
+
+                            <td class="student-name">
+
+                                {{ student["name"] }}
+
+                            </td>
+
+
+                            <!-- EMAIL -->
+
+                            <td>
+
+                                {{ student["email"] }}
+
+                            </td>
+
+
+                            <!-- COURSE -->
+
+                            <td>
+
+                                {{ student["course"] }}
+
+                            </td>
+
+
+                            <!-- YEAR -->
+
+                            <td>
+
+                                Year {{ student["year"] }}
+
+                            </td>
+
+
+                            <!-- MODULE TEACHER -->
+
+                            <td>
+
+                                {% if student["teacher_name"] %}
+
+                                    <strong>
+                                        {{ student["teacher_name"] }}
+                                    </strong>
+
+                                {% else %}
+
+                                    <span style="color:#89919a;">
+                                        Not allocated
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+
+                        {% else %}
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                style="
+                                    text-align:center;
+                                    padding:35px;
+                                "
+                            >
+
+                                <div style="font-size:30px;">
+                                    👥
+                                </div>
+
+                                <br>
+
+                                <strong>
+                                    No students found
+                                </strong>
+
+                                <br><br>
+
+                                <span style="color:#89919a;">
+                                    Try another search or add a new student.
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

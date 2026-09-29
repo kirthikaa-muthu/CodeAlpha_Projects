@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Student - SecureStudent</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">🎓</div>
+
+            <div>
+                <h2>SecureStudent</h2>
+                <p>Management System</p>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <p class="menu-title">MAIN</p>
+
+            <a href="{{ url_for('home') }}" class="nav-link">
+                <span>▣</span>
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('students') }}" class="nav-link">
+                <span>👥</span>
+                Students
+            </a>
+
+            <a href="{{ url_for('add_student') }}" class="nav-link">
+                <span>＋</span>
+                Add Student
+            </a>
+
+            <a href="{{ url_for('modules') }}" class="nav-link">
+                <span>▤</span>
+                Modules
+            </a>
+
+            <a href="{{ url_for('teachers') }}" class="nav-link">
+                <span>👨‍🏫</span>
+                Teachers
+            </a>
+
+
+            <p class="menu-title">MANAGE</p>
+
+            <a href="{{ url_for('manage_edit') }}" class="nav-link active">
+                <span>✎</span>
+                Edit Student
+            </a>
+
+            <a href="{{ url_for('manage_delete') }}" class="nav-link">
+                <span>🗑</span>
+                Delete Student
+            </a>
+
+
+            <p class="menu-title">OTHER</p>
+
+            <a href="{{ url_for('students') }}" class="nav-link">
+                <span>⌕</span>
+                Search
+            </a>
+
+            <a href="{{ url_for('logout') }}" class="nav-link">
+                <span>↪</span>
+                Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+                <h1>Edit Student</h1>
+                <p>Update student information</p>
+            </div>
+
+            <div class="profile">
+
+                <div class="profile-avatar">A</div>
+
+                <div>
+                    <strong>Admin</strong>
+                    <span>Administrator</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="page-heading">
+
+            <div>
+                <h2>Select a Student</h2>
+                <p>Choose a student below to edit their information.</p>
+            </div>
+
+        </section>
+
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <div>
+                    <h3 class="card-title">Student List</h3>
+                    <p>Select the student you want to modify.</p>
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table class="student-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Course</th>
+                            <th>Year</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for student in students %}
+
+                        <tr>
+
+                            <td>
+                                #{{ loop.index }}
+                            </td>
+
+                            <td>
+                                <strong>{{ student["name"] }}</strong>
+                            </td>
+
+                            <td>
+                                {{ student["email"] }}
+                            </td>
+
+                            <td>
+                                {{ student["course"] }}
+                            </td>
+
+                            <td>
+                                Year {{ student["year"] }}
+                            </td>
+
+                            <td>
+
+                                <a href="{{ url_for(
+                                    'edit_student',
+                                    student_id=student['id']
+                                ) }}"
+                                   class="btn btn-primary">
+
+                                    Edit
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="6" class="empty-state">
+                                No students found.
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

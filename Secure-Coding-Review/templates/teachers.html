@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachers - SecureStudent</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">🎓</div>
+            <div>
+                <h2>SecureStudent</h2>
+                <p>Management System</p>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <p class="menu-title">MAIN</p>
+
+            <a href="{{ url_for('home') }}" class="nav-link">
+                <span>▣</span>
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('students') }}" class="nav-link">
+                <span>👥</span>
+                Students
+            </a>
+
+            <a href="{{ url_for('add_student') }}" class="nav-link">
+                <span>＋</span>
+                Add Student
+            </a>
+
+            <a href="{{ url_for('modules') }}" class="nav-link">
+                <span>▤</span>
+                Modules
+            </a>
+
+            <a href="{{ url_for('teachers') }}" class="nav-link active">
+                <span>👨‍🏫</span>
+                Teachers
+            </a>
+
+
+            <p class="menu-title">MANAGE</p>
+
+            <a href="{{ url_for('manage_edit') }}" class="nav-link">
+                <span>✎</span>
+                Edit Student
+            </a>
+
+            <a href="{{ url_for('manage_delete') }}" class="nav-link">
+                <span>🗑</span>
+                Delete Student
+            </a>
+
+
+            <p class="menu-title">OTHER</p>
+
+            <a href="{{ url_for('students') }}" class="nav-link">
+                <span>⌕</span>
+                Search
+            </a>
+
+            <a href="{{ url_for('logout') }}" class="nav-link">
+                <span>↪</span>
+                Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Top Bar -->
+        <header class="topbar">
+
+            <div>
+                <h1>Teachers</h1>
+                <p>Manage teachers and their assigned modules</p>
+            </div>
+
+            <div class="profile">
+                <div class="profile-avatar">A</div>
+
+                <div>
+                    <strong>Admin</strong>
+                    <span>Administrator</span>
+                </div>
+            </div>
+
+        </header>
+
+
+        <!-- Page Heading -->
+        <section class="page-heading">
+
+            <div>
+                <h2>Teacher Directory</h2>
+                <p>View teachers and the modules assigned to them.</p>
+            </div>
+
+        </section>
+
+
+        <!-- Teachers Table -->
+        <section class="card">
+
+            <div class="card-header">
+
+                <div>
+                    <h3 class="card-title">All Teachers</h3>
+                    <p>Current teaching assignments</p>
+                </div>
+
+                <div class="stat-badge">
+                    {{ teachers|length }} Teachers
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table class="student-table">
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Teacher</th>
+                            <th>Email</th>
+                            <th>Assigned Module</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for teacher in teachers %}
+
+                        <tr>
+
+                            <td>
+                                #{{ loop.index }}
+                            </td>
+
+                            <td>
+                                <strong>{{ teacher["name"] }}</strong>
+                            </td>
+
+                            <td>
+                                {{ teacher["email"] or "Not provided" }}
+                            </td>
+
+                            <td>
+
+                                {% if teacher["module_name"] %}
+
+                                    <span class="module-badge">
+                                        {{ teacher["module_name"] }}
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="not-assigned">
+                                        Not assigned
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+                            <td colspan="4" class="empty-state">
+                                No teachers found.
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
